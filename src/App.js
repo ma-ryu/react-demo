@@ -23,8 +23,54 @@ function App() {
           ))}
         </tbody>
       </table>
+
+      {/* コンポーネントの練習 */}
+      <div className="text-center">
+        <Clock />
+      </div>
     </div>
   );
+}
+
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.now = new Date();
+    this.Hours = this.now.getHours();
+    this.Min = this.now.getMinutes();
+    this.Sec = this.now.getSeconds();
+    this.time = `${this.Hours}:${this.Min}:${this.Sec}`
+    this.state = {
+      time: this.time
+    }
+    
+    this.refresh = this.refresh.bind(this);
+  }
+
+  refresh() {
+    this.now = new Date();
+    this.Hours = this.now.getHours();
+    this.Min = this.now.getMinutes();
+    this.Sec = this.now.getSeconds();
+    this.time = `${this.Hours}:${this.Min}:${this.Sec}`
+    
+    this.setState((state) => ({
+      time: this.time
+    }))
+
+  }
+
+  render() {
+    
+    return (
+    <div>
+      <p>現在の時刻を表示します。</p>
+      <p onClick={this.refresh}>{ this.state.time }</p>
+      <button className="btn btn-primary" onClick={this.refresh}>更新</button>
+    </div>
+
+    )
+  }
 }
 
 export default App;
